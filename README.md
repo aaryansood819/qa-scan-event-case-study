@@ -1,7 +1,7 @@
 # Senior QA Case Study: missing "Scan Completed" event
 
 **Author:** Aaryan_Sood · aaryansood819@gmail.com · https://github.com/aaryansood819/
-![[![CI Status](https://github.com/aaryansood819/qa-scan-event-case-study/a](https://github.com/aaryansood819/qa-scan-event-case-study/actions/workflows/ci.yml/badge.svg)
+![[![CI Active](https://github.com/aaryansood819/qa-scan-event-case-study/a](https://github.com/aaryansood819/qa-scan-event-case-study/actions/workflows/ci.yml/badge.svg)
 
 A practical answer to a Senior QA scenario involving a mobile rewards app (Android and iOS) and an event pipeline.
 After a release, some users stop getting a message that should follow a product-code scan. The app records the
