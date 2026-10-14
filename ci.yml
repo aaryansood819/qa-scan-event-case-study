@@ -1,0 +1,42 @@
+name: automation-sample
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  healthy-run:
+    name: Tests pass against healthy mock
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: Run tests
+        working-directory: automation_sample
+        run: mvn -B test
+
+  incident-detection:
+    name: Suite detects the injected incident (expected to FAIL the tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: Tests must fail when events are dropped for iOS + MKT_B
+        working-directory: automation_sample
+        env:
+          MOCK_FAULT: drop_ios_mkt_b
+          EVENT_SLA_SECONDS: "3"
+        run: |
+          if mvn -B test; then
+            echo "ERROR: suite did not detect the injected fault"; exit 1
+          else
+            echo "OK: suite detected the injected fault"
+          fi
